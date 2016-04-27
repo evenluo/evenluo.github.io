@@ -233,6 +233,14 @@
 <p>其中manhattan和apollo是两个项目配置的代号，在测试ssh连接的时候可以用这两个代号。比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy@iZ28lie0h28Z:~$ ssh -T apollo</span><br><span class="line">Hi LinkFirms/Apollo! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">deploy@iZ28lie0h28Z:~$ ssh -T manhattan</span><br><span class="line">Hi LinkFirms/Manhatton! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
 <p>如此！便大功告成！</p>
+<hr>
+<p>可是还是有很多无辜的人说：为神马还是不行。解决方案来啦：首先请确定不是 <a href="http://sshkeychain.sourceforge.net/mirrors/SSH-with-Keys-HOWTO/SSH-with-Keys-HOWTO-6.html" target="_blank" rel="external">ssh-agent</a> 的问题，然后请不要再使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:LinkFirms/Apollo.git</span><br></pre></td></tr></table></figure>
+<p>而是使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@apollo:LinkFirms/Apollo.git</span><br></pre></td></tr></table></figure>
+<p>使用原来的方式的话，如果多个项目在同一个域名下（比如github.com），那么你只能连接到最先出现的那个项目。所以你需要以代号的方式，那样就能正确解析到其他的项目了。其实如果在测试连接的时候，打开详细说明的话就能看出一些问题，运行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vT apollo</span><br></pre></td></tr></table></figure>
+<p>这样的话，就会把详细的流程打印出来，就会发现ssh在找到第一个匹配之后就不会再找了。</p>
 
       
     </div>
